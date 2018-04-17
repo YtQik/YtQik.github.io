@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php
+RewriteRule ^index\.php$ / [L,R=301]
+RewriteRule ^video/(.+)/(.+) main-search.php?q=$1&utm_token=$2
+RewriteRule ^video/(.+) main-search.php?q=$1
+RewriteRule ^file/(.+).html$ download.php?v=$1
+RewriteCond %{HTTP_USER_AGENT} libwww-perl.* 
+RewriteRule .* ? [F,L]
+#######Options -Indexes
+ErrorDocument 404 /404.shtml
